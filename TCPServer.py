@@ -15,16 +15,17 @@ def main(portNumber):
             sentence = connectionSocket.recv(1024)
             lineSplit = sentence.split('\n')
             requestLine = lineSplit[0]
+            print requestLine
             splitString = sentence.split()
             path = splitString[1]
-            print(splitString[1])      # The path of the GET request
+            print splitString[1]     
             f = open('.' + splitString[1], 'rb')
             print 'Sending...'
             
             # Setting the headers bro
             statusLine = "HTTP/1.1 200 OK" + CRLF
             contentTypeLine = "Content-type: " + contentType(fileName) + CRLF
-            
+
             # equivalent of sendBytes in java webServer
             l = f.read(1024)
             print contentType(path)
@@ -33,7 +34,7 @@ def main(portNumber):
                   connectionSocket.send(l)
                   l = f.read(1024)
             f.close()
-            print('Sending Complete')
+            print 'Sending Complete'
 
             connectionSocket.send(sentence)
             connectionSocket.close()
