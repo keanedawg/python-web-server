@@ -17,6 +17,7 @@ def main(portNumber):
             requestLine = lineSplit[0]
             print requestLine
             splitString = sentence.split()
+            print splitString
             path = splitString[1]
             print splitString[1]     
             f = open('.' + splitString[1], 'rb')
@@ -24,7 +25,7 @@ def main(portNumber):
             
             # Setting the headers bro
             statusLine = "HTTP/1.1 200 OK" + CRLF
-            contentTypeLine = "Content-type: " + contentType(path) + CRLF
+            contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
 
             connectionSocket.send(statusLine)
             connectionSocket.send(contentTypeLine)
@@ -47,6 +48,7 @@ def main(portNumber):
 
 
 def contentType(fileName):
+    print fileName
     if fileName.endswith(".htm") or fileName.endswith(".html"):
       return "text/html"
     if fileName.endswith(".jpg") or fileName.endswith(".jpeg"):
