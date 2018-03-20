@@ -11,22 +11,23 @@ def main(portNumber):
  
     try:
         while 1:
+            # Get the connection
             connectionSocket, addr = serverSocket.accept()
             sentence = connectionSocket.recv(1024)
+
+            # Read the information
             lineSplit = sentence.split('\n')
             requestLine = lineSplit[0]
             print requestLine
             splitString = sentence.split()
-            print splitString
             path = splitString[1]
-            print splitString[1]     
             f = open('.' + splitString[1], 'rb')
-            print 'Sending...'
             
             # Setting the headers bro
             statusLine = "HTTP/1.1 200 OK" + CRLF
             contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
 
+            # Send the headers firsts
             connectionSocket.send(statusLine)
             connectionSocket.send(contentTypeLine)
 
@@ -34,11 +35,9 @@ def main(portNumber):
             l = f.read(1024)
             print contentType(path)
             while (l):
-                  print 'Sending...'
                   connectionSocket.send(l)
                   l = f.read(1024)
             f.close()
-            print 'Sending Complete'
             connectionSocket.close()
  
     except KeyboardInterrupt:
