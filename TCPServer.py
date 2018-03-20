@@ -21,24 +21,28 @@ def main(portNumber):
             print requestLine
             splitString = sentence.split()
             path = splitString[1]
-            f = open('.' + splitString[1], 'rb')
-            
-            # Setting the headers bro
-            statusLine = "HTTP/1.1 200 OK" + CRLF
-            contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
 
-            # Send the headers firsts
-            connectionSocket.send(statusLine)
-            connectionSocket.send(contentTypeLine)
+            try:
+                f = open('.' + path, 'r')
+                # Setting the headers bro
+                statusLine = "HTTP/1.1 200 OK" + CRLF
+                contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
 
-            # equivalent of sendBytes in java webServer
-            l = f.read(1024)
-            print contentType(path)
-            while (l):
-                  connectionSocket.send(l)
-                  l = f.read(1024)
-            f.close()
-            connectionSocket.close()
+                # Send the headers firsts
+                connectionSocket.send(statusLine)
+                connectionSocket.send(contentTypeLine)
+
+                # equivalent of sendBytes in java webServer
+                l = f.read(1024)
+                print contentType(path)
+                while (l):
+                      connectionSocket.send(l)
+                      l = f.read(1024)
+                f.close()
+                connectionSocket.close()
+            except IOError as e:
+              print e.strerror
+              connectionSocket.close()
  
     except KeyboardInterrupt:
         print "\nClosing Server"
