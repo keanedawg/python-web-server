@@ -23,7 +23,7 @@ def main(portNumber):
             path = splitString[1]
 
             try:
-                f = open('.' + path)
+                f = open('.' + path, 'rb')
                 # Setting the headers bro
                 statusLine = "HTTP/1.1 200 OK" + CRLF
                 contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
