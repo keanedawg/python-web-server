@@ -41,7 +41,11 @@ def main(portNumber):
                 f.close()
                 connectionSocket.close()
             except IOError as e:
-              print e.strerror
+              statusLine = "HTTP/1.1 404 Not Found" + CRLF
+              contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
+              "<HTML>" +
+              "<HEAD><TITLE>Not Found</TITLE></HEAD>" +
+              "<BODY>Not Found</BODY></HTML>";
               connectionSocket.close()
  
     except KeyboardInterrupt:
