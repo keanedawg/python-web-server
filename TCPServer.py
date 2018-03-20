@@ -7,7 +7,7 @@ def main(portNumber):
     serverSocket.bind(('', serverPort))
     serverSocket.listen(1)
     print 'The Server is ready to receive'
-    CRLF = "\r\n";
+    CRLF = "\r\n"
  
     try:
         while 1:
