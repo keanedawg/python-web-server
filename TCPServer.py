@@ -24,7 +24,10 @@ def main(portNumber):
             
             # Setting the headers bro
             statusLine = "HTTP/1.1 200 OK" + CRLF
-            contentTypeLine = "Content-type: " + contentType(fileName) + CRLF
+            contentTypeLine = "Content-type: " + contentType(path) + CRLF
+
+            connectionSocket.send(statusLine)
+            connectionSocket.send(contentTypeLine)
 
             # equivalent of sendBytes in java webServer
             l = f.read(1024)
