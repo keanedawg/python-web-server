@@ -23,7 +23,7 @@ def main(portNumber):
             path = splitString[1]
 
             try:
-                f = open('.' + path, 'r')
+                f = open('.' + path)
                 # Setting the headers bro
                 statusLine = "HTTP/1.1 200 OK" + CRLF
                 contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
@@ -42,10 +42,9 @@ def main(portNumber):
                 connectionSocket.close()
             except IOError as e:
               statusLine = "HTTP/1.1 404 Not Found" + CRLF
-              contentTypeLine = "Content-type: " + contentType(path) + CRLF + CRLF
-              "<HTML>" +
-              "<HEAD><TITLE>Not Found</TITLE></HEAD>" +
-              "<BODY>Not Found</BODY></HTML>";
+              contentTypeLine = "Content-type: " + "text/html" + CRLF + CRLF
+              content = "<HTML>" + "<HEAD><TITLE>Not Found</TITLE></HEAD>" + "<BODY>Not Found</BODY></HTML>"
+              connectionSocket.send(statusLine + contentTypeLine + content)
               connectionSocket.close()
  
     except KeyboardInterrupt:
