@@ -38,8 +38,6 @@ def main(portNumber):
                   l = f.read(1024)
             f.close()
             print 'Sending Complete'
-
-            connectionSocket.send(sentence)
             connectionSocket.close()
  
     except KeyboardInterrupt:
