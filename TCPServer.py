@@ -1,3 +1,21 @@
+#############################################################################
+# Program:
+#    Lab PythonWebServer, Computer Communication and Networking
+#    Brother Jones, CS 460
+# Author:
+#    Cameron Fife
+# Summary:
+#    Sets up a web server as was done in Lab 1. However, this lab uses Python
+#    to do it instead of Java.
+#
+# Note: If you put #!/usr/bin/python as the first line of this file and
+#       make the program executable, the submit command will not be happy.
+#       Run your Python program using:  python yourCode.py
+#
+#############################################################################
+
+
+
 from socket import *
 import argparse
  
@@ -21,7 +39,6 @@ def main(portNumber):
             print requestLine
             splitString = sentence.split()
             path = splitString[1]
-
             try:
                 f = open('.' + path, 'rb')
                 # Setting the headers bro
